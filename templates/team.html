@@ -1,0 +1,199 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+   body {
+    color: #444;
+    /* background: #f2f2f2; */
+     background: #f2f2f28a;
+  }
+
+  .card {
+    position: relative;
+    overflow: hidden;
+  }
+  .franchise-container h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-align: center;
+    background-color: #cc0000;
+    color: #fff;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+  }
+
+</style>
+<style>
+.custom-pagination .page-link {
+  color: black; /* Bootstrap danger red */
+  border-radius: 50px; /* rounded pill shape */
+  margin: 0 3px;
+  border: 1px solid  black;
+  transition: all 0.2s ease;
+}
+
+.custom-pagination .page-link:hover {
+  background-color:  black;
+  color: white;
+  border-color:  black;
+}
+
+.custom-pagination .page-item.active .page-link {
+  background-color:  black;
+  border-color:  black;;
+  color: white;
+  box-shadow: 0 2px 5px rgba(220, 53, 69, 0.4);
+}
+</style>
+
+
+<div class="container-fluid" style="margin-top: 10px;">
+  <div class="franchise-container">
+   <!-- <h3>Lvl 1 |  {{ member.userPackage }} Team</h3> -->
+    
+  </div>
+  <div class="container py-2">
+  <!-- 🔍 Search Bar -->
+  <div class="row search-bar mb-3">
+    <div class="col-12">
+      <form method="post" action="{% url 'search_team_user' %}">
+        {% csrf_token %}
+        <div class="input-group">
+          <span class="input-group-text bg-white border-end-0">
+            <i class="bi bi-search"></i>
+          </span>
+          <input type="text" class="form-control" name="searchUserId" placeholder="Enter User ID or Mobile" required>
+          <button type="submit" class="btn btn-danger">Search</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+  <div class="row g-4 mt-2">
+    {% for member in team_levels %}
+      <div class="col-md-6 col-lg-4">
+        <div class="card shadow-sm border-0">
+          <!-- Badge -->
+          <div class="position-absolute top-0 start-0 bg-danger text-white px-3 py-1 rounded-end d-flex gap-2 align-items-center" style="width: 420px;">
+            <div><strong>L</strong> {{ member.level }}</div>
+            <div><strong>|</strong> {{ member.userId }}</div>
+            <div><strong>|</strong> {{ member.userName }}</div>
+             <a href="https://wa.me/{{ member.userMobile }}" class="text-white" target="_blank">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="tel:{{ member.userMobile }}" class="text-white ms-2">
+              <i class="fas fa-phone-alt"></i>
+            </a>
+           
+          </div>
+
+          <div class="card-body pt-5 bg-white">
+            <p><strong>Package:</strong> {{ member.userPackage }}</p>
+            <p><strong>Rank:</strong> {{ member.userRank }}</p>
+            <!-- <p><strong>Date:</strong> {{ member.date }}</p> -->
+             <p><strong>Date:</strong> {{ member.date|slice:":10" }}</p>
+              <p><strong>Time:</strong> {{ member.date|slice:"11:" }}</p>
+
+            <!-- <p><strong>Activation Date:</strong> {{ member.activation_date }}</p> -->
+            <p><strong>Sponsor ID:</strong> {{ member.sponsorid }}</p>
+            <p><strong>Sponsor Name:</strong> {{ member.sponsor_name }}</p>
+           
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="col-12">
+        <!-- <div class="alert alert-warning text-center">No team members found.</div> -->
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="d-flex justify-content-center mt-4">
+  <nav>
+    <ul class="pagination custom-pagination">
+      {% if team_levels.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ team_levels.previous_page_number }}">Previous «</a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <span class="page-link">Previous «</span>
+        </li>
+      {% endif %}
+
+      {% for num in team_levels.paginator.page_range %}
+        {% if team_levels.number == num %}
+          <li class="page-item active">
+            <span class="page-link">{{ num }}</span>
+          </li>
+        {% else %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+
+      {% if team_levels.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ team_levels.next_page_number }}">Next »</a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <span class="page-link">Next »</span>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+</div>
+
+<!-- 
+<div class="d-flex justify-content-center mt-4">
+  <nav>
+    <ul class="pagination custom-pagination">
+      {% if team_levels.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ team_levels.previous_page_number }}">«</a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <span class="page-link">«</span>
+        </li>
+      {% endif %}
+
+      {# SMART PAGINATION BLOCK #}
+      {% for num in team_levels.paginator.page_range %}
+        {% if num == 1 or num == team_levels.paginator.num_pages or num >= team_levels.number|add:'-2' and num <= team_levels.number|add:'2' %}
+          {% if team_levels.number == num %}
+            <li class="page-item active">
+              <span class="page-link">{{ num }}</span>
+            </li>
+          {% else %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+            </li>
+          {% endif %}
+        {% elif num == team_levels.number|add:'-3' or num == team_levels.number|add:'3' %}
+          <li class="page-item disabled">
+            <span class="page-link">…</span>
+          </li>
+        {% endif %}
+      {% endfor %}
+
+      {% if team_levels.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ team_levels.next_page_number }}">»</a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <span class="page-link">»</span>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+</div> -->
+
+{% endblock %}

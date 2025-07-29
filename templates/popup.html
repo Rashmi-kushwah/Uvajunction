@@ -1,0 +1,68 @@
+<style>
+    
+
+   .popup-banner-container {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    text-align: center;
+  }
+@media (max-width: 576px) {
+
+  .popup-banner-container {
+  
+    bottom: 50%;
+    left: 50%;
+  }
+   .popup-banner img {
+       max-width: 250px;
+       height: 220px;
+   }
+}
+  .popup-banner {
+    position: relative;
+    display: inline-block;
+  }
+
+  .popup-banner img {
+    max-width: 280px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  }
+
+  .popup-close {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 16px;
+    cursor: pointer;
+    line-height: 22px;
+    padding: 0;
+  }
+</style>
+
+{% if Popup_data %}
+  <div class="popup-banner-container" id="popupBanner">
+    {% for b in Popup_data %}
+      <div class="popup-banner">
+        <button class="popup-close" onclick="document.getElementById('popupBanner').style.display='none'">×</button>
+        <a href="" target="_blank">
+          <img src="https://api.zbazaarsolutions.biz{{ b.image }}" alt="Popup Banner">
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+
+
+
+  {% else %}
+  <p>No popup banners found.</p>
+  {% endif %}

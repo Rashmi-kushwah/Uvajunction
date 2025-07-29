@@ -1,0 +1,44 @@
+<!-- templates/unauthorized.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unauthorized</title>
+    <style>
+        body {
+            background: #f8f9fa;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 100px;
+        }
+        .unauthorized-box {
+            display: inline-block;
+            padding: 30px;
+            border: 1px solid #ccc;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #dc3545;
+        }
+        p {
+            margin-top: 10px;
+            color: #333;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="unauthorized-box">
+        <h1>401 - Unauthorized</h1>
+        <p>You do not have permission to access this page.</p>
+        <a href="{% url 'sign_in' %}">Go to Login</a>
+    </div>
+</body>
+</html>

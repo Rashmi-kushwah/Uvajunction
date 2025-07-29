@@ -1,0 +1,138 @@
+<!-- Bootstrap CSS CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Cart Count AJAX -->
+
+
+  <style>
+  .top-header {
+    background: linear-gradient(to right, #1e1e2f, #2d2d4e);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+   
+
+    /* width: 160px;
+    height: 50px; */
+  }
+  .top-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999; /* Make sure it stays above other elements */
+  background-color: white; /* Or any color to prevent transparency */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
+}
+
+
+
+  .scrollable-nav {
+    white-space: nowrap;
+    scrollbar-width: none;
+  }
+
+  .scrollable-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-item {
+    min-width: 60px;
+    color: #333;
+  }
+
+  .nav-icon-img {
+    width: 180px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 5px;
+    border: 2px solid #ddd;
+  }
+
+  .nav-item div {
+    font-size: 13px;
+  }
+
+  #sidebar{
+    margin-bottom: 80px;
+  }
+</style>
+
+<body class="">
+<header class="top-header" style="padding: 25px;">
+  <div class="d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center">
+  <!-- open-Sidebar -->
+    <button onclick="openSidebar()" class="btn btn-outline-light shadow-sm mr-2">
+    <i class="fas fa-bars"></i>
+  </button>
+      <!-- <img src="data:image/jpeg;base64,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" class=" me-2" alt="Profile" width="140" height="60"> -->
+      <div>
+        <a href="{% url 'home' %}" style="text-decoration: none;">
+          <div class="text-white fw-bold" style="font-size: 20px;">Uva-Junction</div>
+        </a>
+      </div>
+    </div>
+    <div class="d-flex align-items-center gap-3">
+      <i class="bi bi-search text-white fs-5"></i>
+      <i class="bi bi-geo-alt-fill text-white fs-5"></i>
+      <i class="bi bi-cart-fill text-white fs-5"></i>
+    </div>
+  </div>
+</header>
+
+
+    <!-- Sidebar -->
+
+    <!-- <div id="sidebar" class="fixed top-16 left-0  h-full w-64 bg-white shadow-md transform -translate-x-full transition-transform duration-300 z-50 overflow-y-auto" > -->
+    <!-- <div id="sidebar" class="fixed top-16 bottom-12 left-0 w-64 bg-white shadow-md transform -translate-x-full transition-transform duration-300 z-50 overflow-y-auto"> -->
+  <div id="sidebar" class="fixed top-16 left-0 h-[calc(100%-50px)] w-64 bg-white shadow-md transform -translate-x-full transition-transform duration-300 z-50 overflow-y-auto">
+
+      <div class="p-4 flex justify-between items-center border-b">
+        <h2 class="text-lg font-bold">Menu</h2>
+        <button onclick="closeSidebar()"><i class="fas fa-times text-xl"></i></button>
+      </div>
+      <ul class="p-4 space-y-4" style="margin-bottom: 90px;">
+
+            <li>
+              <a href="" class="flex items-center space-x-2 text-gray-700 hover:text-red-600 hover:bg-gray-100 rounded-md px-3 py-2 transition duration-200">
+                <i class="fa fa-tachometer-alt"></i> <span>Dashboard</span>
+              </a>
+            </li>
+
+            <li>
+              <a href="" class="flex items-center space-x-2 text-gray-700 hover:text-red-600 hover:bg-gray-100 rounded-md px-3 py-2 transition duration-200">
+                <i class="fa fa-user"></i><span>Profile</span>
+              </a>
+            </li>
+
+
+            <li>
+              <a href="{% url 'logout' %}" class="flex items-center space-x-2 text-gray-700 hover:text-red-600 hover:bg-gray-100 rounded-md px-3 py-2 transition duration-200">
+                <i class="fa fa-sign-out-alt"></i><span>Logout</span>
+              </a>
+            </li>
+
+      </ul>
+
+    </div>
+<!-- Overlay (for mobile) -->
+<div id="overlay" onclick="closeSidebar()" class="fixed inset-0 bg-black opacity-50 hidden z-40"></div>
+
+
+   {% include "menu.html" %} 
+
+    <!-- JavaScript -->
+    <script>
+      function openSidebar() {
+        document.getElementById('sidebar').classList.remove('-translate-x-full');
+        document.getElementById('overlay').classList.remove('hidden');
+      }
+
+      function closeSidebar() {
+        document.getElementById('sidebar').classList.add('-translate-x-full');
+        document.getElementById('overlay').classList.add('hidden');
+      }
+      </script>

@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+  .rank-card {
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  .progress-bar-custom {
+    height: 6px;
+    border-radius: 5px;
+  }
+  .progress-label {
+    font-weight: bold;
+    color: #28a745;
+  }
+  /* .rank-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  } */
+
+  .rank-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #e88f8f; /* Red background */
+    padding: 6px; /* Space between image and background edge */
+    object-fit: cover;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+
+
+  .franchise-container h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 7px 15px;
+    text-align: center;
+    background-color: #cc0000;
+    color: #fff;
+    margin-bottom: 10px;
+    border-radius: 10px;
+  }
+  .badge {
+  font-size: 0.75rem;
+}
+.rank-icon {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  background-color: #ffcccc;
+}
+
+</style>
+
+<div class="container my-4">
+  <div class="franchise-container">
+    <h1>Rank Progress</h1>
+  </div>
+
+  <!-- Current Rank Box with Red Background -->
+  {% if current_rank %}
+  <div class="p-4 rounded text-white" style="background-color: #cc0000;">
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <h5 class="mb-1">Current Rank</h5>
+        <h3 class="fw-bold">{{ current_rank.rank }}</h3>
+        <div>{{ current_rank.zv }} ZV</div>
+        <h1>{{ totalzv.zv }}</h1>
+         Total ZV: {{ totalzv }} 
+  
+
+
+       <!-- <h1>{{ totalzv.zv }}</h1>  -->
+      </div>
+
+     
+      <div class="text-end">
+        <div class="small text-white-100">Next: {{ current_rank.next_rank }}</div>
+        <div class="small text-white-100">{{ achieved_count }}/{{ total_ranks }} Ranks</div>
+      </div>
+    </div>
+    <div class="progress mt-3" style="height: 6px; background-color: #fff;">
+      <div class="progress-bar" role="progressbar"
+           style="width: {{ journey_percent }}%; background-color: #fff;"
+           aria-valuenow="{{ journey_percent }}" aria-valuemin="0" aria-valuemax="100">
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Rank Cards -->
+  {% for rank in rank_data %}
+  {{rank.Bronze}}
+     <div class="rank-card d-flex align-items-center position-relative">
+    
+    <div class="position-relative">
+      <!-- <img src="/media/gold.jpeg" class="rank-icon me-3" alt="{{ rank.rank }}"> -->
+      <!-- <img src="{% static 'media/' %}{{ rank.rank|lower }} jpg" class="rank-icon me-3" alt="{{ rank.rank }}"> -->
+          
+    <img src="/media/{{ rank.rank|lower }}.jpeg" class="rank-icon me-3" alt="{{ rank.rank }}">
+    <!-- ✅ Notification badge -->
+          <span class="badge bg-danger text-white position-absolute top-0 start-100 translate-middle rounded-pill px-2">
+                
+                {% if rank.rank == "Bronze" %}
+                  {{ rank_data.0.Bronze }}
+                {% elif rank.rank == "Silver" %}
+                  {{ rank_data.0.Silver }}
+                {% elif rank.rank == "Gold" %}
+                  {{ rank_data.0.Gold }}
+                {% elif rank.rank == "Platinum" %}
+                  {{ rank_data.0.Platinum }}
+                {% elif rank.rank == "Topaz" %}
+                  {{ rank_data.0.Topaz }}
+                {% elif rank.rank == "Ruby" %}
+                  {{ rank_data.0.Ruby }}
+                {% elif rank.rank == "Diamond" %}
+                  {{ rank_data.0.Diamond }}
+                {% else %}
+                  Unknown
+                {% endif %}
+                            
+                
+          </span>
+
+      </div>
+
+      
+      <div class="flex-grow-1">
+        <div class="d-flex justify-content-between">
+          <div>
+            <h5 class="mb-1">{{ rank.rank }}</h5>
+            {% if rank.achieved %}
+              <small class="text-success">● {{ rank.achieved_date }}</small>
+            {% else %}
+              <small class="text-secondary">Not achieved</small>
+            {% endif %}
+          </div>
+          <div class="text-end text-danger fw-semibold">
+            {{ rank.zv }} ZV
+          </div>
+        </div>
+        <div class="mt-1 text-muted">Required: {{ rank.required_zv }} ZV</div>
+        <div class="progress mt-2">
+          {% widthratio rank.zv rank.required_zv 100 as percent %}
+          <div class="progress-bar bg-success progress-bar-custom" style="width: {{ percent }}%"></div>
+        </div>
+        <div class="mt-1 progress-label">{{ percent }}%</div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+   body {
+    color: #444;
+    background: #f2f2f2;
+  }
+
+  .card {
+    position: relative;
+    overflow: hidden;
+  }
+  .franchise-container h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-align: center;
+    background-color: #cc0000;
+    color: #fff;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+  }
+</style>
+
+<div class="container-fluid" style="margin-top: 10px;">
+  <div class="franchise-container">
+   <h3>Lvl 1 | Team</h3>
+  </div>
+{% if error_msg %}
+    <div class="alert alert-danger text-center">
+        {{ error_msg }}
+    </div>
+{% endif %}
+
+
+  <div class="row g-4 mt-2">
+    {% for member in search_team_user %}
+      <div class="col-md-6 col-lg-4">
+        <div class="card shadow-sm border-0">
+          <!-- Badge -->
+          <div class="position-absolute top-0 start-0 bg-danger text-white px-3 py-1 rounded-end d-flex gap-2 align-items-center" style="width: 420px;">
+            <div><strong>L</strong> {{ member.level }}</div>
+            <div><strong>|</strong> {{ member.userId }}</div>
+            <div><strong>|</strong> {{ member.userName }}</div>
+             <a href="https://wa.me/{{ member.userMobile }}" class="text-white" target="_blank">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="tel:{{ member.userMobile }}" class="text-white ms-2">
+              <i class="fas fa-phone-alt"></i>
+            </a>
+           
+          </div>
+
+          <div class="card-body pt-5 bg-white">
+            <p><strong>Package:</strong> {{ member.userPackage }}</p>
+            <p><strong>Rank:</strong> {{ member.userRank }}</p>
+            <!-- <p><strong>Date:</strong> {{ member.date }}</p> -->
+             <p><strong>Date:</strong> {{ member.date|slice:":10" }}</p>
+              <p><strong>Time:</strong> {{ member.date|slice:"11:" }}</p>
+
+            <!-- <p><strong>Activation Date:</strong> {{ member.activation_date }}</p> -->
+            <p><strong>Sponsor ID:</strong> {{ member.sponsorid }}</p>
+            <p><strong>Sponsor Name:</strong> {{ member.sponsor_name }}</p>
+           
+          </div>
+        </div>
+      </div>
+ 
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,123 @@
+
+{% load static %}
+ 
+<style>
+  .nav-scroll-container {
+    display: flex;
+    overflow-x: auto;
+    padding: 15px 5px;
+    background-color: white;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+    gap: 12px;
+    box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-scroll-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* .nav-item-box {
+    flex: 0 0 auto;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    height: 80px;
+
+  } */
+   .nav-item-box {
+  display: flex;                 /* Add this */
+  flex-direction: column;        /* Stack image and name vertically */
+  justify-content: center;       /* Vertically center content */
+  align-items: center;           /* Horizontally center content */
+  width: 70px;
+  height: 80px;
+  text-align: center;
+}
+
+
+.nav-icon-img:hover {
+  background-color: #002244; /* Slightly darker blue on hover */
+}
+
+
+  .nav-icon-img {
+    /* width: 100%; */
+    width:60px ;
+    max-width: 90px;
+    min-width: 70px;
+    height: auto;
+    object-fit: contain;
+    background-color: #022649; /* Dark blue */
+  border-radius: 50%;
+  padding: 5px;
+  color: white;
+  transition: background-color 0.3s;
+
+  }
+
+
+  .nav-item-name {
+    font-size: 12px;
+    font-weight: 700;
+  /* margin-right: 15px; */
+    white-space: nowrap;
+    text-align: center;
+   align-items: center;
+  }
+
+  @media (min-width: 992px) {
+    .nav-scroll-container {
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .nav-item-box {
+      width: 80px;
+    }
+
+    .nav-icon-img {
+      max-width: 50px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .nav-scroll-container {
+      gap: 10px;
+      padding: 8px;
+    }
+
+    .nav-item-box {
+      width: 60px;
+    }
+
+    .nav-item-name {
+      font-size: 11px;
+    white-space: nowrap;
+    text-align: center;
+
+    }
+  }
+</style>
+
+
+
+<!-- Scrollable Navbar with Images -->
+  {% if menu.status == "success" %}
+    <div class="nav-scroll-container" style="margin-top: 80px;">
+        {% for item in menu.data %}
+                  <a href="{% url 'homepage_view_dynamic' item.name|slugify  %}" class="text-decoration-none text-dark">
+                    <div class="nav-item-box">
+                      <img src="https://api.zbazaarsolutions.biz{{ item.Category_image }}" class="nav-icon-img" alt="{{ item.name }}">
+                      <div class="nav-item-name" style="text-align: center;">{{ item.name }}</div>
+                    </div>
+                  </a>
+        {% endfor %}
+   
+    
+    </div>
+  {% endif %}
+
+

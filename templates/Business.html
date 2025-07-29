@@ -1,0 +1,431 @@
+{% extends 'base.html' %}
+{% block content %}
+<title> {% block title %} Business team {% endblock %} </title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap 5 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome (for icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+  <style>
+    .card-box {
+      border-radius: 12px;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+    }
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-top: 1px solid #ddd;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+    }
+    .bottom-nav a {
+      text-decoration: none;
+      color: #666;
+      font-size: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .bottom-nav a.active {
+      color: #d50000;
+    }
+    .center-scan {
+      position: absolute;
+      bottom: 35px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #d50000;
+      border-radius: 50%;
+      width: 56px;
+      height: 56px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 24px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    }
+
+   
+        body {
+            background: #f8f9fa;
+        }
+        .id-card-container {
+            /* max-width: 400px; */
+            margin: 50px auto;
+        }
+       .id-card {
+        /* max-width: 400px; */
+        margin: 50px auto;
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        text-align: center;
+        /* padding: 25px 20px; */
+        position: relative;
+        overflow: hidden;
+    }
+        .id-card-header {
+            background: #dc3545;
+            color: white;
+            padding: 15px 0;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #dc3545;
+            margin-top: -50px;
+            background: white;
+        }
+        .id-card-body {
+            padding: 20px 0;
+        }
+        .info-label {
+            font-weight: 500;
+            color: #555;
+        }
+        .info-value {
+            font-weight: bold;
+            color: #212529;
+        }
+        
+    .id-card .rank-badge {
+        background-color: #fff5cc;
+        color: #ffcc00;
+        font-weight: bold;
+        display: inline-block;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+    .id-card .info-line {
+        display: flex;
+        justify-content: space-between;
+        margin: 8px 0;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .type-marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  background: #cc0000;
+  padding: 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  color: grey;
+  font-weight: 600;
+}
+
+  .marquee-wrapper {
+    width: 100%;
+    background: linear-gradient(90deg, #ff6ec4, #fcb045, #ffeb3b);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 10px 18px;
+    margin-top: 10px;
+    /* border-radius: 0 0 10px 10px; */
+  }
+
+ .marquee-text {
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  } 
+
+  .blinking-cursor {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: white;
+    animation: blink 1s step-start infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .containers {
+    margin-bottom: 180px;
+  }
+</style>
+
+
+    
+<div class="container py-3">
+
+  <!-- Membership & Rank -->
+  <div class="row g-3 mb-3">
+    <div class="col-6">
+      <div class="card-box bg-white p-3 text-center">
+        <!--package_purchase_history_view url  -->
+            <a href="" style="color: black; text-decoration: none;">
+        <div><i class="fas fa-star text-warning fs-4"></i></div>
+    
+        <div class="fw-bold">Membership</div>
+        </a>
+        <div>Super Prime</div>
+      </div>
+    </div>
+    <div class="col-6">
+        <!-- rank_history_view -->
+       <a href="{% url 'team_rank_view' %}" style="color: black; text-decoration: none;">
+          <div class="card-box bg-white p-3 text-center">
+            <div><i class="fas fa-star text-warning fs-4"></i></div>
+            <div class="fw-bold">Rank  </div>
+            <div>Gold</div>
+          </div>
+        </div>
+     </a>
+  </div>
+
+  <!-- Team Info -->
+   <!-- <div class="container py-3">
+  <div class="card-box bg-success-subtle p-3 text-center mb-3">
+
+    <div class="row">
+      <a href="{% url 'today_TeamLevelCount'  'Free' %}" >
+      <div class="col-6 border-end">
+        <div class="fs-5 fw-bold"> {{free_users}}</div>
+
+        <div>Today Paid Team</div>
+      </div>
+      </a>
+
+      <a href="{% url 'today_TeamLevelCount'  'Paid' %}" >
+      <div class="col-6">
+        <div class="fs-5 fw-bold">{{paid_users}}</div>
+        <div>Today Free Team</div>
+      </div>
+      </a>
+    </div>
+  </div>
+</div> -->
+
+
+<div class="row g-3 mb-3">
+  <div class="col-6">
+   
+      <a href="{% url 'today_TeamLevelCount'  'Paid' %}"class="text-decoration-none text-dark" >
+      <div class="card-box bg-success-subtle  p-3 text-center shadow-sm rounded-3">
+        <div></div>
+         <div class="fs-5 fw-bold">{{paid_users}}</div>
+        <div>Today Paid Team</div>
+      </div>
+    </a>
+  </div>
+
+   <div class="col-6">
+
+        <a href="{% url 'today_TeamLevelCount'  'Free' %}"class="text-decoration-none text-dark" >
+      <div class="card-box bg-success-subtle  p-3 text-center shadow-sm rounded-3">
+        <div></div>
+        <div class="fs-5 fw-bold">{{free_users}}</div>
+        <div>Today Free Team</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+
+  <!-- Income Info -->
+  <div class="card-box bg-info-subtle p-3 text-center mb-3">
+    <div class="row">
+      <div class="col-6 border-end">
+        <div class="fw-bold">Today Income</div>
+        <div class="fs-5">₹ 0.00</div>
+      </div>
+      <div class="col-6">
+        <div class="fw-bold">Total Income</div>
+        <div class="fs-5">₹ 0.00</div>
+      </div>
+    </div>
+  </div>
+  <!-- Marquee Wrapper -->
+  <div class="w-full overflow-hidden bg-danger shadow-md">
+
+  <div class="text-center text-white text-md md:text-lg font-semibold tracking-wide">
+    <span id="typewriter"></span><span class="blinking-cursor">|</span>
+  </div>
+</div>
+<br>
+
+
+
+  {% if marquee_text %}
+  <!-- <div class="marquee-wrapper">
+    <div class="marquee-text">
+      <span id="typewriter"></span><span class="blinking-cursor">|</span>
+    </div>
+  </div> -->
+
+<!-- <div class="marquee-wrapper">
+  <div class="marquee-text">
+    {{ marquee_text }}
+  </div>
+</div> -->
+
+  <script>
+    const phrases = {{ marquee_text|safe }}; // Example: ["Welcome to Zbazaar!"]
+    
+    let i = 0; // current phrase index
+    let j = 0; // current character index
+    let currentPhrase = '';
+    let isDeleting = false;
+    const el = document.getElementById("typewriter");
+
+    function loop() {
+      const fullText = phrases[i];
+
+      if (!isDeleting) {
+        currentPhrase = fullText.substring(0, j + 1);
+        j++;
+      } else {
+        currentPhrase = fullText.substring(0, j - 1);
+        j--;
+      }
+
+      el.textContent = currentPhrase;
+
+      if (!isDeleting && j === fullText.length) {
+        isDeleting = true;
+        setTimeout(loop, 1500); // pause before deleting
+        return;
+      }
+
+      if (isDeleting && j === 0) {
+        isDeleting = false;
+        i = (i + 1) % phrases.length;
+      }
+
+      setTimeout(loop, isDeleting ? 50 : 100);
+    }
+
+    loop();
+  </script>
+{% endif %}
+
+
+
+  <!-- Wallet -->
+  <div class="card-box bg-warning-subtle p-3 d-flex justify-content-between align-items-center mb-3">
+    <div class="d-flex align-items-center">
+      <i class="fas fa-wallet fs-4 text-warning me-2"></i>
+      <div>
+        <div class="fw-bold">Pin Wallet</div>
+      </div>
+    </div>
+    <div class="fs-5 fw-bold">0</div>
+  </div>
+
+  <!-- Actions -->
+  <div class="row g-3 mb-5">
+    <div class="col-6">
+      <div class="card-box p-3 text-center bg-light">
+        <i class="fas fa-exchange-alt fs-3 text-dark"></i>
+        <div class="fw-bold mt-2">Withdraw & Transfer</div>
+      </div>
+    </div>
+    <div class="col-6">
+           <a href="" style="color: black; text-decoration: none;">
+      <div class="card-box p-3 text-center bg-light">
+        <i class="fas fa-sync-alt fs-3 text-primary"></i>
+        <div class="fw-bold mt-2">Activation & Updation</div>
+      </div>
+         </a>
+    </div>
+    <div class="col-6">
+        <!-- fetch_franchise_user -->
+      <a href="" style="color: black; text-decoration: none;">
+        <div class="card-box p-3 text-center bg-light">
+          <i class="fas fa-store fs-3 text-pink"></i>
+          <div class="fw-bold mt-2">Franchise Partners</div>
+        </div>
+      </a>
+    </div>
+    <div class="col-6">
+      <div class="card-box p-3 text-center bg-light">
+        <i class="fas fa-hand-holding-usd fs-3 text-primary"></i>
+        <div class="fw-bold mt-2">Zed Value</div>
+        <div class="fw-bold">0</div>
+      </div>
+    </div>
+    <div class="col-12">
+        <!-- Myteam_view -->
+      <a href="{% url 'get_team_count' %}" style="text-decoration: none; color: #333;">
+        <div class="card-box p-3 text-center bg-warning-subtle">
+        <i class="fas fa-users fs-3 text-warning"></i>
+        <div class="fw-bold mt-2">My Team</div>
+
+      </a>
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  </script>
+
+  <!-- JavaScript Typing Animation -->
+<!-- <script>
+  const phrases = {{ marquee_messages|safe }};
+
+  let i = 0, j = 0, currentPhrase = [], isDeleting = false;
+  const el = document.getElementById('typewriter');
+  const cursor = document.querySelector('.blinking-cursor');
+
+  function loop() {
+    el.innerHTML = currentPhrase.join('');
+    
+    if (!isDeleting && j <= phrases[i].length) {
+      currentPhrase.push(phrases[i][j]);
+      j++;
+    } else if (isDeleting && j > 0) {
+      currentPhrase.pop();
+      j--;
+    }
+
+    if (j === phrases[i].length) {
+      isDeleting = true;
+      setTimeout(loop, 1500);
+      return;
+    }
+
+    if (isDeleting && j === 0) {
+      isDeleting = false;
+      i = (i + 1) % phrases.length;
+    }
+
+    setTimeout(loop, isDeleting ? 50 : 100);
+  }
+
+  loop();
+ -->
+
+
+  
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<title>{% block title %}Error{% endblock %}</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<div class="container mt-5">
+  <div class="alert alert-danger text-center shadow-lg rounded-4 p-5">
+    <h2 class="mb-4">⚠️ Oops! Something went wrong.</h2>
+    <p class="lead">{{ message|default:"An unexpected error occurred. Please try again later." }}</p>
+
+    <div class="mt-4">
+      <a href="{% url 'home' %}" class="btn btn-outline-danger me-2">Back to Home</a>
+      <a href="javascript:history.back()" class="btn btn-danger">Try Again</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

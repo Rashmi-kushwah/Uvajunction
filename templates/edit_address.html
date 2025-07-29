@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block content %}
+<title>{% block title %} Profile {% endblock %}</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div class="container my-5">
+     <!-- {% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+{% endif %} -->
+
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header  text-white rounded-top-4" style="background-color: #02a7c4;">
+                    <h4 class="mb-0 text-center py-2">Edit Address</h4>
+                </div>
+                <div class="card-body p-4">
+                  <form method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="address_id" value="{{ address.id }}">
+
+                    <div class="mb-3">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-control" name="name" value="{{ address.name }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Mobile</label>
+                        <input type="text" class="form-control" name="mobile" value="{{ address.mobile }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Address</label>
+                        <textarea class="form-control" name="address" rows="3" required>{{ address.address }}</textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">City</label>
+                            <input type="text" class="form-control" name="city" value="{{ address.city }}" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">District</label>
+                            <input type="text" class="form-control" name="district" value="{{ address.district }}" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">State</label>
+                            <input type="text" class="form-control" name="state" value="{{ address.state }}" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Pincode</label>
+                            <input type="text" class="form-control" name="pincode" value="{{ address.pincode }}" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Label</label>
+                        <input type="text" class="form-control" name="label" value="{{ address.label }}" required>
+                    </div>
+
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" name="is_display" value="true" id="is_display"
+                            {% if address.is_display %}checked{% endif %}>
+                        <label class="form-check-label" for="is_display">Make this default address</label>
+                    </div>
+
+                    <button type="submit" class="btn w-100"   style="background-color: #02a7c4; color: #fff;">Update Address</button>
+                </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

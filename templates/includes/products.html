@@ -1,0 +1,655 @@
+
+
+  
+  <style>
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 10px;
+      /* margin: 40px 0 30px; */
+      position: relative;
+    }
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 4px;
+      background-color: red;
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+
+    .product-card {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: #fff;
+      padding: 6px;
+      height: 100%;
+    }
+
+    .product-image-container {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f4f4f4;
+      overflow: hidden;
+    }
+
+    .product-image-container img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+    }
+
+    .product-title {
+      font-size: 15px;
+      font-weight: 900;
+      margin-top: 10px;
+      color: maroon;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: left;
+
+    }
+
+    .product-prices {
+      display: flex;
+      gap: 10px;
+      margin-top: 5px;
+      align-items: center;
+    }
+
+    .product-price {
+      color: black;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .product-mrp {
+      text-decoration: line-through;
+      color: #888;
+      font-size: 14px;
+    }/* Button Row Style */
+.action-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+/* Quantity Selector */
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.qty-btn {
+  padding: 5px 10px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #ccc;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.qty-input {
+  width: 50px;
+  text-align: center;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Common Button Style */
+.action-row button,
+.action-row a {
+  padding: 7px 15px;
+  border: none;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+/* Add to Cart Button */
+.add-cart-btn {
+  background-color: #ff9800;
+  color: white;
+}
+
+/* Buy Now Button */
+.buy-now-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.add-cart-btn:hover {
+  background-color: #e68900;
+}
+
+.buy-now-btn:hover {
+  background-color: #3e8e41;
+  color: #fff;
+}
+
+.action-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap; /* prevent wrapping */
+  flex-direction: row;
+}
+
+/* Responsive handling */
+@media (max-width: 480px) {
+  .action-row {
+    gap: 3px;
+    padding: 0 5px;
+    justify-content: space-between;
+  }
+
+  .action-row button,
+  .action-row a {
+    flex: 1 1 auto; /* allow button to shrink */
+    font-size: 9px;
+    padding: 6px 8px;
+  }
+}
+
+
+    .custom-col {
+  flex: 0 0 20%;
+  max-width: 20%;
+}
+
+@media (max-width: 1200px) {
+  .custom-col {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+}
+
+@media (max-width: 992px) {
+  .custom-col {
+    flex: 0 0 33.33%;
+    max-width: 33.33%;
+  }
+}
+
+@media (max-width: 768px) {
+  .custom-col {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 576px) {
+  .custom-col {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+  @media (min-width: 1200px) {
+    .col-xxl-1-5 {
+      flex: 0 0 20%;
+      max-width: 20%;
+    }
+  }
+
+
+
+  
+
+  .top-header {
+    background: linear-gradient(to right, #1e1e2f, #2d2d4e);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.custom-pagination {
+  background: #f8f9fa;
+  padding: 10px 20px;
+  border-radius: 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.custom-pagination .page-link {
+  background-color: #0d6efd;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s ease-in-out;
+}
+
+.custom-pagination .page-link:hover {
+  background-color: #0b5ed7;
+  text-decoration: none;
+}
+
+.custom-pagination .page-status {
+  color: #333;
+  font-weight: 500;
+}
+
+
+.nav-scroll-containers {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  height: 100vh;
+  width: 150px; /* 👈 Set desired fixed width */
+  padding: 10px;
+  background-color: white;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  gap: 12px;
+  box-shadow: inset -1px 0 6px rgba(0, 0, 0, 0.05);
+}
+
+
+.nav-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-item-boxs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-direction: row; /* So image and text are side-by-side */
+  width: 100%;
+  height: auto;
+}
+
+.nav-icon-imgs {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.nav-item-names {
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  white-space: nowrap;
+}
+
+  .overlay-backdrop {
+    position: absolute; /* Use absolute so it doesn't block fixed page scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh; /* So it covers tall pages too */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+    display: none;
+    pointer-events: auto; /* Allow click */
+  }
+  
+.hover-shadow-item:hover {
+    background-color: #f0f8ff;
+    transition: 0.3s;
+  }
+
+  .nav-item-boxs {
+    gap: 1px;
+  }
+
+  .nav-item-names {
+    font-size: 13px;
+  }
+   #mobileSidebar a:hover {
+    background-color: #f1f8ff;
+    transition: 0.3s;
+  }
+</style>
+
+</head>
+<body>
+<!-- Mobile Sidebar (hidden by default) -->
+<div id="mobileSidebar" class="position-fixed top-0 start-0 bg-white border-end shadow" style="width: 200px; height: 100vh; display: none; z-index: 1050; overflow-y: auto;">
+  <!-- <h6 class="text-start mt-2 mb-2 border-bottom pb-2">Our Products</h6> -->
+
+  {% if menu.status == "success" %}
+    <div class="px-2">
+      <!-- <a href="{% url 'homepage_view_dynamic' app_menu|slugify %}" class="text-decoration-none text-dark">
+        <div class="d-flex flex-column align-items-center text-center py-2 border-bottom">
+          <strong>All Products</strong>
+        </div>
+      </a> -->
+
+        <a href="{% url 'homepage_view_dynamic' app_menu|slugify %}" class="text-decoration-none text-dark">
+            <div class="d-flex flex-column align-items-center text-center py-2 border-bottom  ">
+              <img src="/media/all.png" alt="All Products" style="width: 35px; height: 35px;" >
+              <strong>All Products</strong>
+            </div>
+
+      {% for item in categories %}
+        <a href="{% url 'homepage_view_dynamic' app_menu|slugify %}?category={{ item.name|slugify }}" class="text-decoration-none text-dark">
+          <div class="d-flex flex-column align-items-center text-center py-2 border-bottom">
+            <img src="https://api.zbazaarsolutions.biz{{ item.Category_image }}" alt="{{ item.name }}" style="width: 40px; height: 40px;">
+            <div class="small mt-1">{{ item.name }}</div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+
+<!-- Mobile Sidebar (hidden by default) -->
+<!-- <div id="mobileSidebar" class="position-fixed top-0 start-0 bg-white border-end shadow" style="width: 200px; height: 100vh; display: none; z-index: 1050; overflow-y: auto;">
+ <h6 class="text-start mt-1 mb-1 border-bottom pb-2">Our Products</h6>
+
+  {% if menu.status == "success" %}
+    <div class="px-3">
+    <a href="{% url 'homepage_view_dynamic' app_menu|slugify %}" class="text-decoration-none text-dark">All Products</a>
+
+      {% for item in categories %}
+      <a href="{% url 'homepage_view_dynamic' app_menu|slugify %}?category={{ item.name|slugify }}" class="text-decoration-none text-dark">
+
+   
+        <div class="nav-item-boxs d-flex align-items-center mb-2">
+          <img src="https://api.zbazaarsolutions.biz{{ item.Category_image }}" class="nav-icon-imgs me-" alt="{{ item.name }}" style="width: 50px; height: 50px;">
+          <div class="nav-item-names md">{{ item.name }}</div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div> -->
+
+<!-- Overlay for mobile sidebar -->
+<!-- <div id="overlay" class="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50" style="z-index: 1040; display: none;" onclick="toggleSidebar()"></div> -->
+
+<div id="overlay" class="overlay-backdrop" onclick="toggleSidebar()"></div>
+
+<div class="container-fluid mt-4">
+  <div class="row">
+
+ <div class="col-auto d-none d-md-block px-0" id="sidebar" style="width: 150px;">
+  <div class="cards" style="height: 100%;">
+    {% if menu.status == "success" %}
+      <div class="nav-scroll-containers border rounded p-2 bg-light" style="height: 100%;">
+        <!-- <h6 class="text-start mt-3 mb-3 border-bottom pb-2">Our Products</h6> -->
+        <!-- <div class="d-flex flex-column align-items-center text-center py-2 border-bottom">
+              <strong>Our Products</strong>
+            </div> -->
+
+         <a href="{% url 'homepage_view_dynamic' app_menu|slugify %}" class="text-decoration-none text-dark">
+            <div class="d-flex flex-column align-items-center text-center py-2 border-bottom  ">
+              <img src="/media/all.png" alt="All Products" style="width: 35px; height: 35px;" >
+              <strong>All Products</strong>
+            </div>
+      </a>
+        {% for item in categories %}
+          <a href="{% url 'homepage_view_dynamic' app_menu|slugify %}?category={{ item.name|slugify }}" class="text-decoration-none text-dark">
+            <div class="nav-item-boxs d-flex flex-column align-items-center text-center py-2 border-bottom hover-shadow-item">
+              <img src="https://api.zbazaarsolutions.biz{{ item.Category_image }}" alt="{{ item.name }}" style="width: 35px; height: 35px;">
+              <div class="nav-item-names small mt-1">{{ item.name }}</div>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+
+
+<!-- <div class="container-fluid mt-4">
+  <div class="row">
+
+ 
+    <div class="col-auto d-none d-md-block px-0" id="sidebar" style="width: 150px;">
+      
+      <div class="cards" style="height: 100%; ">
+        {% if menu.status == "success" %}
+        <div class="nav-scroll-containers border rounded p-2 bg-light" style="height: 100%; ">
+          <h6 class="text-start mt-3 mb-3 border-bottom pb-2">Our Products</h6>
+
+         
+          {% for item in categories %}
+            <a href="{% url 'homepage_view_dynamic' app_menu|slugify %}?category={{ item.name|slugify }}" class="text-decoration-none text-dark rounded hover-shadow-item">
+              <div class="nav-item-boxs d-flex align-items-center mb-2">
+                <img src="https://api.zbazaarsolutions.biz{{ item.Category_image }}" class="nav-icon-imgs me-2" alt="{{ item.name }}" style="width: 30px; height: 30px;">
+                <div class="nav-item-names small">{{ item.name }}</div>
+              </div>
+            </a>
+          {% endfor %}
+
+        </div>
+        {% endif %}
+      </div>
+    </div> -->
+
+
+
+
+
+    <!-- Products Grid -->
+    <div class="col">
+        <!-- <h2 class="section-title">Our Products</h2> -->
+      <!-- TOGGLE BUTTON ON SMALL SCREENS -->
+      <!-- <button class="btn btn-primary d-md-none mb-3" onclick="toggleSidebar()">☰ Our Products</button> -->
+       <button class="btn  d-md-none mb-3 w-100 position-relative" onclick="toggleSidebar()" style="background-color: #f4f4f4;">
+  <span class="position-absolute start-0 ps-3" style="font-size: 20px;">☰</span>
+  <span class="d-block text-center" style="font-weight: 500;">Our Products</span>
+</button>
+
+
+      <div class="row g-3">
+        
+        {% for product in products %}
+        <div class="col-6 col-sm-4 col-md-3 col-xxl-1-5">
+          <div class="product-card text-center d-flex flex-column justify-content-between p-2 border rounded shadow-sm">
+
+            <!-- Image -->
+            <a href="{% url 'product_detail_view' product.Product_id %}">
+              <div class="product-image-container mb-2">
+                <img src="https://api.zbazaarsolutions.biz{{ product.Product_image }}" alt="{{ product.product_name }}"
+                  class="img-fluid product-img" />
+              </div>
+            </a>
+
+            <!-- Title -->
+            <div class="product-title fw-bold small">{{ product.product_name }}</div>
+
+            <!-- Prices -->
+            <div class="product-prices my-2">
+              <div class="product-price text-success fw-bold">₹{{ product.discounted_price }}</div>
+              <div class="product-mrp text-muted small"><s>₹{{ product.original_price }}</s></div>
+            </div>
+
+            <!-- Add to Cart / Buy Now -->
+            <div class="action-row">
+                      <!-- Quantity Selector -->
+                      
+
+                      <!-- Add to Cart -->
+
+                      <!-- <form id="addToCartForm-{{ product.product_id }}"> -->
+                       <form id="addToCartForm" method="POST"  action="{% url 'Addcart_view' %}">
+                         {% csrf_token %}
+                        <input type="hidden" name="product_id" value="{{ product.Product_id }}">
+                        <input type="hidden" name="sizes" value="{{ product.sizes }}">
+                        <input type="hidden" name="quantity" class="qty-input" value="1" min="1">
+
+                      
+                             <button type="submit"  class=" btn btn-danger fw-medium shadow">
+                                <i class="bi bi-cart-plus me-1"></i> 
+                              Add 
+                            </button>
+                          
+                      </form>
+                      <!-- <form id="addToCartForm" method="POST"  action="{% url 'Addcart_view' %}">
+             
+                        {% csrf_token %}
+                  
+                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                        <input type="hidden" name="sizeses6`e " value="{{ product.sizes }}">
+                        <input type="hidden" name="quantity" class="qty-input" value="1" min="1">
+                   
+                          <button type="submit"  class=" btn btn-danger fw-medium shadow">
+                              Add 
+                            </button>
+                          
+
+                        </div>
+                      </form> -->
+
+                      
+
+                      <!-- Buy Now -->
+                      <a href="#" class="buy-now-btn">Buy Now</a>
+                    </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="pagination-wrapper" style="margin-bottom: 70px;">
+  <div class="custom-pagination d-flex justify-content-between">
+    
+   
+
+
+  <nav>
+    <ul class="pagination mb-0">
+      <!-- Previous -->
+      {% if pagination.page > 1 %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ pagination.page|add:"-1" }}{% if selected_category %}&category={{ selected_category }}{% endif %}">Previous</a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <span class="page-link">Previous</span>
+        </li>
+      {% endif %}
+
+      <!-- Page Info -->
+      <li class="page-item disabled">
+        <span class="page-link">
+          Page {{ pagination.page }} of {{ pagination.total_pages }}
+        </span>
+      </li>
+
+      <!-- Next -->
+      {% if pagination.page < pagination.total_pages %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ pagination.page|add:"1" }}{% if selected_category %}&category={{ selected_category }}{% endif %}">Next</a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <span class="page-link">Next</span>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+
+
+
+
+  </div>
+</div>
+
+
+  </div>
+</div>
+
+
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('mobileSidebar');
+    const overlay = document.getElementById('overlay');
+    const isVisible = sidebar.style.display === 'block';
+
+    sidebar.style.display = isVisible ? 'none' : 'block';
+    overlay.style.display = isVisible ? 'none' : 'block';
+  }
+</script>
+
+
+<script>
+function getCSRFToken(form) {
+    const csrfToken = form.querySelector('[name=csrfmiddlewaretoken]');
+    return csrfToken ? csrfToken.value : '';
+}
+
+function addToCart(productId) {
+    const form = document.getElementById(`addToCartForm-${productId}`);
+    const product_id = form.querySelector('[name="product_id"]').value;
+    const sizes = form.querySelector('[name="sizes"]').value;
+    const quantity = form.querySelector('[name="quantity"]').value;
+    const csrfToken = getCSRFToken(form);
+
+    fetch("{% url 'Addcart_view' %}", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "X-CSRFToken": csrfToken
+        },
+        body: new URLSearchParams({
+            product_id,
+            sizes,
+            quantity
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status) {
+            console.log("Cart Added:", data);
+            alert("Product added to cart!");
+        } else {
+            alert("Error: " + data.message);
+        }
+    })
+    .catch(error => {
+        console.error("Add to cart failed:", error);
+        alert("Something went wrong!");
+    });
+}
+
+</script>
+
+
+<!-- TOGGLE SCRIPT -->
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('mobileSidebar');
+    const overlay = document.getElementById('overlay');
+    const isVisible = sidebar.style.display === 'block';
+
+    sidebar.style.display = isVisible ? 'none' : 'block';
+    overlay.style.display = isVisible ? 'none' : 'block';
+  }
+</script>

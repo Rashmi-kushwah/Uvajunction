@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Responsive Profile Carousel</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<style>
+    body {
+  overflow-x: hidden;
+}
+
+.testimonials-section {
+  text-align: center;
+  padding: 40px 0;
+  background-color: #f8f9fa;
+}
+
+.testimonials-section h2 {
+  font-size: 23px;
+  margin-bottom: 20px;
+  font-weight: 800;
+  color: black;
+}
+
+.testimonials-wrapper {
+  overflow: hidden;
+  width: 100%;
+  max-width: 100vw;
+  position: relative;
+}
+
+.testimonials-container {
+  display: flex;
+  gap: 10px;
+  width: max-content;
+  animation: scroll 5s linear infinite;
+}
+
+.testimonial-card {
+  flex: 0 0 270px;
+  padding: 10px;
+}
+
+.testimonial-content {
+  background-color: #fff;
+  color: #333;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 280px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  font-size: 14px;
+  line-height: 1.4;
+  overflow: hidden;
+}
+
+.testimonial-content p {
+  font-size: 13px;
+  margin-top: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.author-image img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 10px;
+  border: 1px solid grey;
+}
+
+.author-name {
+  font-size: 14px;
+  font-weight: bold;
+  color: orange;
+}
+
+.star {
+  color: gold;
+  font-size: 18px;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 768px) {
+  .testimonial-card {
+    flex: 0 0 70vw;
+  }
+}
+
+@media (max-width: 576px) {
+  .testimonial-card {
+    flex: 0 0 60vw;
+  }
+}
+
+/* Scroll animation */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+</style>
+</head>
+<body>
+
+<div class="testimonials-section" style="margin-bottom: 70px;">
+  <h2>Testimonials</h2>
+  <div class="testimonials-wrapper">
+    <div class="testimonials-container" id="testimonials-container">
+      {% for t in testimonial_data %}
+      <div class="testimonial-card">
+        <div class="testimonial-content">
+          <div class="testimonial-author">
+            <div class="author-image">
+              <img src="{{ t.profileImageUrl }}" alt="Profile Icon">
+            </div>
+            <div class="author-name">
+              {{ t.name }} <small>{{ t.rank }}</small>
+            <div class="star">
+            
+               <span style="color: gold;">
+                {% if t.rating|add:"0" >= 1 %}&#9733;{% endif %}
+                {% if t.rating|add:"0" >= 2 %}&#9733;{% endif %}
+                {% if t.rating|add:"0" >= 3 %}&#9733;{% endif %}
+                {% if t.rating|add:"0" >= 4 %}&#9733;{% endif %}
+                {% if t.rating|add:"0" >= 5 %}&#9733;{% endif %}
+            </span>
+            </div>
+            </div>
+          </div>
+          <p>“{{ t.testimonial }}”</p>
+        </div>
+      </div>
+      {% empty %}
+      <p>No testimonials available.</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const container = document.getElementById('testimonials-container');
+    const testimonials = container.querySelectorAll('.testimonial-card');
+
+    if (testimonials.length === 1) {
+      for (let i = 0; i < 10; i++) {
+        const clone = testimonials[0].cloneNode(true);
+        container.appendChild(clone);
+      }
+    } else {
+      container.innerHTML += container.innerHTML;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

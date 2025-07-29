@@ -1,0 +1,253 @@
+
+
+{% extends 'base.html' %}
+{% block content %}
+<!-- Bootstrap CSS (if not already included in base.html) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-k6PhjWPSQ6T4uZMb5V+zT1CgH9zQnZLmnU10xE6W4f5Z2ZVb3h4JWxSTY9Ue+ZJzUw9+l0Gm5VvNj9JqXKqKug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+<style>
+  
+  @media (min-width: 768px) {
+    .custom-height {
+      height: auto;
+ 
+    }
+  }
+  @media (max-width: 767.98px) {
+    .custom-height {
+      height: 1000px;
+    }
+  }
+
+  .custom-footers {
+  background-color: #fff;
+  padding: 10px 0;
+  /* width: 100%; */
+  /* position: fixed; */
+  /* bottom: 0; */
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+
+  left: 0;
+  z-index: 999; /* ensure it's above other elements */
+}
+
+.footer-labels {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.footer-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 60px;
+}
+.footer-item a{
+  text-decoration: none;
+}
+
+.footer-text {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.footer-icon {
+  font-size: 22px;
+  color: #555;
+  transition: color 0.3s ease;
+}
+
+.footer-icon:hover {
+  color: #dc3545;
+}
+</style>
+<!-- {{profile_data}} -->
+<div class="container mt-4" style="margin-bottom: 8px;">
+  <div class="row shadow-lg border  rounded-4 overflow-hidden custom-height" >
+
+    <!-- Left: Profile Image & Name -->
+    <div class="col-md-4  text-white d-flex flex-column align-items-center justify-content-center p-4" style="background-color: #1e1e2f;">
+     
+
+      <img 
+        src="{% if profile_data.profile %}https://api.zbazaarsolutions.biz{{ profile_data.profile }}{% else %}/media/profile.jpeg{% endif %}" 
+        alt="Profile Picture" 
+        class="rounded-circle border border-white shadow mb-3" 
+        style="width: 130px; height: 130px; object-fit: cover;"
+      />
+      <h2 class="h5 fw-bold">{{ profile_data.username }}</h2>
+      <p class="text-light small">User ID: {{ profile_data.userid }}</p>
+    </div>
+
+    <!-- Right: Profile Details -->
+    <div class="col-md-8 p-4">
+      <div class="col-md-12 p-4 position-relative"> 
+  <!-- Edit Icon -->
+  <a href="{% url 'update_profile_view' %}" 
+     class="position-absolute top-0 end-0 m-3 d-flex align-items-center text-decoration-none">
+    
+    <!-- Edit icon in black -->
+    <img src="/media/edit.png" 
+         alt="Edit" 
+         style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; filter: brightness(0) invert(0);" />
+
+    <!-- Edit text in red -->
+    <span class="ms-1 fw-semibold text-danger">Edit</span>
+  </a>
+</div>
+
+
+
+      <h3 class="text-danger mb-4 fw-semibold">Profile Information</h3>
+       
+      <div class="row g-3 text-secondary">
+
+              <div class="col-sm-6">
+                <strong class="text-danger">Mobile:</strong>
+                <p class="mb-0">{{ profile_data.mobile }}</p>
+              </div>
+
+              <div class="col-sm-6">
+                <strong class="text-danger">Email:</strong>
+                <p class="mb-0">{{ profile_data.email }}</p>
+              </div>
+
+              <div class="col-sm-6">
+                <strong class="text-danger">Package:</strong>
+                <p class="mb-0">{{ profile_data.package }}</p>
+              </div>
+
+              <div class="col-sm-6">
+                <strong class="text-danger">Email Verified:</strong>
+                <p class="mb-0 {% if profile_data.is_email_verified %}text-success{% else %}text-danger{% endif %}">
+                  {% if profile_data.is_email_verified %}✅ Yes{% else %}❌ No{% endif %}
+                </p>
+              </div>
+
+              <div class="col-sm-6">
+                <strong class="text-danger">Device Verified:</strong>
+                <p class="mb-0 {% if profile_data.is_device_verified %}text-success{% else %}text-danger{% endif %}">
+                  {% if profile_data.is_device_verified %}✅ Yes{% else %}❌ No{% endif %}
+                </p>
+              </div>
+
+              <div class="col-sm-6">
+                <strong class="text-danger">Activation Date:</strong>
+                <p class="mb-0">{{ profile_data.activation_date }}</p>
+              </div>
+
+              <div class="col-sm-6">
+                <strong class="text-danger">Joined:</strong>
+                <p class="mb-0">{{ profile_data.date|date:"Y-m-d H:i" }}</p>
+              </div>
+
+              <div class="col-sm-6">
+                <strong class="text-danger">Rank:</strong>
+                <p class="mb-0">{{ profile_data.rank}}</p>
+              </div>
+
+              <div class="col-sm-6">
+                <strong class="text-danger">Date of Birth:</strong>
+                <p class="mb-0">{{ profile_data.dob}}</p>
+              </div>
+
+              <div class="col-sm-6">
+                <strong class="text-danger">Gender:</strong>
+                <p class="mb-0">{{ profile_data.gender}}</p>
+              </div>
+
+              <div class="col-sm-6">
+                <strong class="text-danger">Nominee Name:</strong>
+                <p class="mb-0">{{ profile_data.nominee_name  }}</p>
+              </div>
+
+              <div class="col-sm-6">
+                <strong class="text-danger">Nominee Relation:</strong>
+                <p class="mb-0">{{ profile_data.nominee_relation }}</p>
+              </div>
+
+              <div class="col-sm-6">
+                <strong class="text-danger">Sponsor :</strong>
+              <p class="mb-0">{{ profile_data.sponsor.sponsorid }} - {{ profile_data.sponsor.sponsor_name }}</p>
+              </div>
+              
+           
+        </div>
+    </div>
+  </div>
+  
+</div>
+
+    <!-- nav-footer -->
+    <footer class="custom-footers" style="margin-bottom: 80px;">
+      <div class="footer-labels d-flex justify-content-between text-center">
+
+        <div class="footer-item">
+          <a href="{% url 'Business_view' %}">
+         <i class="bi bi-briefcase footer-icon"></i>
+          <div class="footer-text">Business</div>
+        
+        </div>
+      
+        <!-- <div class="footer-item">
+          <a href="">
+         <i class="bi bi-briefcase footer-icon"></i>
+          <div class="footer-text">today_Team_count</div>
+        
+        </div> -->
+      
+
+
+
+        <div class="footer-items">
+        <a href="{% url 'homepage_view' %}" style="text-decoration: none;">
+            <i class="bi bi-house-door-fill footer-icon"></i>
+          <div class="footer-text">Home</div>
+          </a>
+        
+        </div>
+        <!--  -->
+          <div class="footer-items">
+        <a href="{% url 'Add_testimonials' %}" style="text-decoration: none;">
+            <i class="bi bi-chat-quote-fill footer-icon"></i>
+
+          <div class="footer-text"> Testimonial</div>
+          </a>
+        
+        </div>
+            <div class="footer-items">
+       
+        <!--  -->
+  
+
+        
+
+            </div>
+
+
+        
+        </a>
+        <div class="footer-item">
+            <i class="bi bi-heart-fill footer-icon"></i>
+          <div class="footer-text">Wishlist</div>
+        
+        </div>
+        <div class="footer-item">
+        <a href="{% url 'setting_view' %}">
+            <i class="bi bi-gear-fill footer-icon"></i>
+          <div class="footer-text">Settings</div>
+        </a>
+        </div>
+      </div>
+    </footer> 
+
+
+{% endblock %}

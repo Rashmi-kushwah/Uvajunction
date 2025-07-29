@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h4>Notifications</h4>
+    {% for n in notification_data %}
+        <div class="card mb-2" id="notification-{{ n.id }}">
+            <div class="card-body d-flex justify-content-between">
+                <div>
+                    <h5 class="card-title">{{ n.title }}</h5>
+                    <p class="card-text">{{ n.description }}</p>
+                    <small class="text-muted">{{ n.date }}</small>
+                </div>
+                <div>
+                    <i class="fas fa-trash-alt"
+                       style="color: red; cursor: pointer;"
+                       onclick="deleteNotification({{ n.id }})"
+                       title="Delete Notification"></i>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p>No notifications available.</p>
+    {% endfor %}
+</div>
+
+<script>
+function deleteNotification(id) {
+    fetch("{% url 'delete_notification' %}", {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': '{{ csrf_token }}',
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `notification_id=${id}`
+    }).then(res => res.json()).then(data => {
+        if (data.status === 200 || data.message === "Notification deleted successfully") {
+            document.getElementById(`notification-${id}`).remove();
+        } else {
+            alert(data.message || "Delete failed");
+        }
+    });
+}
+</script>
+{% endblock %}

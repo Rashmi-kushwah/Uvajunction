@@ -1,0 +1,151 @@
+    <!-- Bootstrap CSS CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"/>
+
+  <style>
+  .top-header {
+    background: linear-gradient(to right, #1e1e2f, #2d2d4e);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  .top-header {
+    padding: 10px 20px;
+    /* height: 70px; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999; /* Make sure it stays above other elements */
+  background-color: white; /* Or any color to prevent transparency */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
+}
+
+
+
+  .scrollable-nav {
+    white-space: nowrap;
+    scrollbar-width: none;
+  }
+
+  .scrollable-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-item {
+    min-width: 60px;
+    color: #333;
+  }
+
+  .nav-icon-img {
+    width: 180px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 5px;
+    border: 2px solid #ddd;
+  }
+
+  .nav-item div {
+    font-size: 13px;
+  }
+  .user{
+    font-size: 10px;
+    color: #fff;
+    margin-left: 5px;
+  }
+.logo_image{
+width: 45px;
+height: 45px;
+border-radius: 50%; 
+display: block; 
+}
+.texts {
+font-size: 20px;
+margin-left: 5px;
+color: #fff;
+font-weight: bold;
+}
+.texts a{
+    text-decoration: none;
+  }
+
+@media (max-width: 480px) {
+  .logo_image {
+    width: 35px;
+    height: 35px;
+
+    margin-bottom: 5px;
+  }
+  .texts {
+    font-size: 14px;
+  }
+}
+
+
+</style>
+    <!-- Bootstrap CSS CDN -->
+
+
+<header class="top-header">
+  <div class="d-flex align-items-center justify-content-between">
+
+    {% if user_data %}
+    <div class="d-flex align-items-center">
+<a href="{% url 'homepage_view' %}" style="text-decoration: none; ">
+    <img class="logo_image" src="https://api.zbazaarsolutions.biz{{ user_data.profile }}" alt="{{ user_data.name }}"
+     style="margin-bottom: 10px; object-fit:contain;" 
+     class="me-2 ">
+
+      <div>
+        
+        <div class="texts">{{ user_data.username }}</div>
+        <p class="user">{{ user_data.userid }}</p>
+        </a>
+      </div>
+    </div>
+    {% else %}
+    <div class="d-flex align-items-center">
+ 
+     
+    <!-- <img src="/media/profile.jpeg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%;" class="me-2 "> -->
+  <img class="logo_image" src="/media/profile.jpeg" alt="Profile">
+
+      <div>
+        <a href="{% url 'home' %} " style="text-decoration: none; ">
+        <div class="texts">Uva-Junction</div>
+        </a>
+      </div>
+    </div>
+    {% endif %}
+    <div class="d-flex align-items-center gap-3">
+
+          <!-- Cart Icon (visible on all screens) -->
+      <a href="{% url 'get_notification_view' %}" class="relative text-white  hover:text-red-600">
+   
+        <i class="fa-solid fa-bell fa-lg"></i>
+         </a>
+      <!-- <i class="bi bi-search text-white fs-5"></i>
+      <i class="bi bi-geo-alt-fill text-white fs-5"></i> -->
+      <a href="{% url 'cart_list_view' %}">
+      <span class="absolute  -right-2 bg-red-500 text-white text-xs rounded-full px-1 sup_cart" style="margin-top: -8px; margin-right: 55px;">{{ cart_count }}</span>
+      <i class="bi bi-cart-fill text-white fs-5"></i>
+      </a>
+
+      
+      <!-- <a href="{% url 'cart_list_view' %}" class="relative text-gray-700 hover:text-red-600">
+              <i class="bi bi-cart-fill footer-icon"></i>
+            <span class="absolute  -right-2 bg-red-500 text-white text-xs rounded-full px-1 sup_cart" style="margin-top: -65px;">{{ cart_count }}</span>
+
+          
+          </a> -->
+      <a href="{% url 'logout' %}" class="text-white">
+        <i class="bi bi-box-arrow-right fs-5"></i>
+      </a>
+
+    </div>
+  </div>
+</header>
+   {% include "menu.html" %} 
+
+

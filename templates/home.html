@@ -1,0 +1,225 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+  <style>
+    body {
+      background: url('') no-repeat center center fixed;
+      background-size: cover;
+      /* color: white; */
+      font-family: sans-serif;
+    }
+
+
+.product-scroll {
+  overflow-x: auto;
+  white-space: nowrap;
+  margin-bottom: 20px;
+}
+.product-image-container {
+    height: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: #f4f4f4; 
+
+
+}
+
+.scroll-container {
+  display: flex;
+}
+
+.product-card {
+  flex: 0 0 auto;
+  width: 150px;
+  margin: 0 10px;
+}
+
+.product-image-container {
+    height: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: #f4f4f4; 
+    padding: 10px;
+    border-radius: 10px;
+
+
+}
+
+.product-img {
+  width: 100%;
+  border-radius: 10px;
+} 
+
+
+  /* Hide scrollbar for all browsers */
+  .product-scroll::-webkit-scrollbar {
+    display: none;
+  }
+  .product-scroll {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;     /* Firefox */
+  }
+
+
+.welcome-text {
+      text-align: center;
+      font-size: 2rem;
+      margin: 30px 0 10px;
+      font-weight: 800;
+      color: rgb(166, 11, 11);
+     
+    }
+    .signin-btn {
+      background-color: #1e1e2f;
+      border: none;
+      padding: 10px 40px;
+      font-size: 1.2rem;
+      margin: 20px auto;
+      display: block;
+      border-radius: 30px;
+      color: #fff;
+    }
+    a .signin-btn {
+        text-decoration: none;
+    }
+.signin-btn:hover {
+  background-color: rgb(166, 11, 11); 
+  color: #ffffff;          
+  transform: scale(1.05);   
+  transition: all 0.3s ease; 
+}
+
+.links {
+      display: flex;
+      justify-content: space-evenly;
+    
+      font-weight: bold;
+      margin: 10px 0 0 10px;
+      color: #000;
+ 
+}
+.links a{
+  color: #1e1e2f;
+}
+
+
+  </style>
+</head>
+<body>
+<div class="container-fluid" style="margin-top: 20px;">
+
+        <div class="product-scroll" data-direction="right">
+          <div class="scroll-container">
+            {% for pd in products %}
+            
+                <div class="product-card">
+                  <div class="product-image-container">
+                    <img src="https://api.zbazaarsolutions.biz{{ pd.Product_image }}" class="product-img" alt="{{ product.name }}">
+                  </div>
+                </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        
+        <div class="product-scroll" data-direction="left">
+          <div class="scroll-container">
+            {% for pd in products %}
+          
+              <div class="product-card">
+                <div class="product-image-container">
+                  <img src="https://api.zbazaarsolutions.biz{{ pd.Product_image }}" class="product-img" alt="{{ product.name }}">
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          </div>
+    </div>
+
+
+
+  <!-- Welcome -->
+  <div class="welcome-text">Welcome to Uva-Junction!</div>
+
+  <!-- Sign In Button -->
+   <a href="{% url 'sign_in' %}" style="text-decoration: none;">
+  <button class="signin-btn">Sign In</button>
+    </a>
+
+  <!-- Links -->
+  <div class="links">
+    <a href="{% url 'new_user_register' %}" style="text-decoration: none;">
+        <span style="text-decoration: underline;">New User</span>
+    </a>
+    <a href="{% url 'homepage_view' %}" style="text-decoration: none;">
+    <span style="text-decoration: underline;">As a Guest</span>
+    </a>
+  </div>
+  </div>
+
+  <!-- Footer -->
+  <script>
+  const scrollContainers = document.querySelectorAll('.product-scroll');
+  const scrollData = [];
+
+  scrollContainers.forEach(container => {
+    const scrollInner = container.querySelector('.scroll-container');
+
+    // Take original items snapshot (static list)
+    const originalItems = Array.from(scrollInner.children);
+
+    if (originalItems.length < 10) {
+      const cloneCount = Math.ceil(20 / originalItems.length); // Limit clones
+      for (let i = 0; i < cloneCount; i++) {
+        originalItems.forEach(item => {
+          const clone = item.cloneNode(true);
+          scrollInner.appendChild(clone);
+        });
+      }
+    }
+
+    scrollData.push({
+      element: container,
+      amount: 0,
+      direction: container.getAttribute('data-direction') === 'left' ? -1 : 1
+    });
+  });
+
+  function autoScroll() {
+    scrollData.forEach(data => {
+      const container = data.element;
+      const maxScroll = container.scrollWidth - container.clientWidth;
+
+      data.amount += 1 * data.direction;
+
+      if (data.amount >= maxScroll) {
+        data.amount = 0; // Loop back to start
+      } else if (data.amount <= 0) {
+        data.amount = maxScroll; // Loop back to end
+      }
+
+      container.scrollLeft = data.amount;
+    });
+  }
+
+  setInterval(autoScroll, 20); // Speed control
+</script> 
+
+
+
+</body>
+</html>
+   

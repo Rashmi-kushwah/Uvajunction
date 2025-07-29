@@ -1,0 +1,100 @@
+
+{% load static %}
+<style>
+.custom-footer {
+  background-color: #f8f9fa;
+  padding: 10px 0;
+  border-top: 1px solid #ccc;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 999; /* ensure it's above other elements */
+}
+
+.footer-labels {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.footer-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 60px;
+}
+.footer-item a{
+  text-decoration: none;
+}
+
+.footer-text {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.footer-icon {
+  font-size: 22px;
+  color: #555;
+  transition: color 0.3s ease;
+}
+
+.footer-icon:hover {
+  color: #dc3545;
+}
+
+    </style>
+
+
+    <footer class="custom-footer">
+      <div class="footer-labels d-flex justify-content-between text-center">
+        <div class="footer-item">
+        <a href="{% url 'homepage_view' %}">
+            <i class="bi bi-house-door-fill footer-icon"></i>
+          <div class="footer-text">Home</div>
+          </a>
+        
+        </div>
+        <div class="footer-item">
+        
+          <a href="{% url 'cart_list_view' %}" class="relative text-gray-700 hover:text-red-600">
+              <i class="bi bi-cart-fill footer-icon"></i>
+            <div class="footer-text">Cart</div>
+            <span class="absolute  -right-2 bg-red-500 text-white text-xs rounded-full px-1 sup_cart" style="margin-top: -65px;">{{ cart_count }}</span>
+
+          
+          </a>
+            </div>
+
+
+        <div class="footer-item">
+          <a href="{% url 'get_profile_view' %}">
+            <i class="bi bi-person-circle footer-icon"></i>
+          <div class="footer-text">Profile</div>
+        
+        </div>
+        </a>
+        <div class="footer-item">
+            <i class="bi bi-heart-fill footer-icon"></i>
+          <div class="footer-text">Wishlist</div>
+        
+        </div>
+        <div class="footer-item">
+        <a href="{% url 'setting_view' %}">
+            <i class="bi bi-gear-fill footer-icon"></i>
+          <div class="footer-text">Settings</div>
+        </a>
+        </div>
+      </div>
+    </footer> 
+
+   
+
+
+ 
+
+    
